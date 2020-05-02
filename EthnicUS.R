@@ -5,8 +5,7 @@ percent_map <- function(var, color, legend.title, min = 0, max = 100) {
     shades <- colorRampPalette(c("black", color))(100)
     
     # constrain gradient to percents that occur between min and max
-    var <- pmax(var, min)
-    var <- pmin(var, max)
+    
     percents <- as.integer(cut(var, 100, 
                                include.lowest = TRUE, ordered = TRUE))
     fills <- shades[percents]
@@ -57,12 +56,12 @@ server<-shinyServer(
                             "Percent Asian" = "cyan1")
             
             legend <- switch(input$var, 
-                             "Percent Caucasian" = "ercent Caucasian",
+                             "Percent Caucasian" = "Percent Caucasian",
                              "Percent African American" = "Percent African American",
                              "Percent Hispanic" = "Percent Hispanic",
                              "Percent Asian" = "Percent Asian")
             
-            percent_map(var = data, color = color, legend.title = legend, max = input$range[2], min = input$range[1])
+            percent_map(var = data, color = color, legend.title = legend,  max = input$range[2], min = input$range[1])
         })
     }
 )
